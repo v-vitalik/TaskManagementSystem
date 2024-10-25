@@ -1,6 +1,6 @@
 ﻿namespace TaskManagementSystem.Domain.Enums
 {
-    public enum Status
+    public enum TaskEntityStatus
     {
         NotStarted = 0,
         InProgress = 1,

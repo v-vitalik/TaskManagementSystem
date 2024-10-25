@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskManagementSystem.API.Models;
 using TaskManagementSystem.Application.DTOs;
 using TaskManagementSystem.Application.Enums;
 using TaskManagementSystem.Application.Services;
@@ -16,6 +17,17 @@ namespace TaskManagementSystem.API.Controllers
             _taskService = taskService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var result = await _taskService.GetAllTasksAsync();
+            return result.Status switch
+            {
+                OperationStatus.Success => Ok(result.Data),
+                _ => StatusCode(500, new { result.Errors })
+            };
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddTaskAsync([FromBody] TaskDto taskDto)
         {
@@ -28,25 +40,14 @@ namespace TaskManagementSystem.API.Controllers
             };
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateTaskAsync([FromBody] TaskDto taskDto)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateTaskStatusAsync(int id, [FromBody] UpdateTaskStatusModel model)
         {
-            var result = await _taskService.UpdateTaskAsync(taskDto);
+            var result = await _taskService.UpdateTaskStatusAsync(id, model.NewStatus);
             return result.Status switch
             {
                 OperationStatus.Success => Ok(),
                 OperationStatus.NotFound => NotFound(),
-                _ => StatusCode(500, new { result.Errors })
-            };
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
-        {
-            var result = await _taskService.GetAllTasksAsync();
-            return result.Status switch
-            {
-                OperationStatus.Success => Ok(result.Data),
                 _ => StatusCode(500, new { result.Errors })
             };
         }
