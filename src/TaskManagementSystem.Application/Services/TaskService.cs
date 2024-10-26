@@ -50,6 +50,7 @@ namespace TaskManagementSystem.Application.Services
                 _logger.LogError(ex, "Failed to add task, TaskDto: {@TaskDto}", taskDto);
                 return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
             }
+            taskDto.Id = taskId;
             return new(taskId);
         }
 
@@ -78,7 +79,7 @@ namespace TaskManagementSystem.Application.Services
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Failed to update task status, Id: {@TaskDto}", id);
+                _logger.LogError(ex, "Failed to update task status, Id: {@id}", id);
                 return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
             }
             return new();

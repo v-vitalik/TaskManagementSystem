@@ -1,4 +1,5 @@
-﻿using TaskManagementSystem.Domain.Enums;
+﻿using System.Text.Json.Serialization;
+using TaskManagementSystem.Domain.Enums;
 
 namespace TaskManagementSystem.Application.DTOs
 {
@@ -7,7 +8,8 @@ namespace TaskManagementSystem.Application.DTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Domain.Enums.TaskEntityStatus? Status { get; set; }
-        public string AssignedTo { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public TaskEntityStatus? Status { get; set; }
+        public string? AssignedTo { get; set; }
     }
 }

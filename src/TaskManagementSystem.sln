@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{61EB44EC-CB2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{14DC1906-A6F3-4D9E-BFAF-95F00F3DE370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementSystem.DataAccess", "TaskManagementSystem.DataAccess\TaskManagementSystem.DataAccess.csproj", "{DF313964-C3B4-4AEF-9698-D858D7897D36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagementSystem.DataAccess", "TaskManagementSystem.DataAccess\TaskManagementSystem.DataAccess.csproj", "{DF313964-C3B4-4AEF-9698-D858D7897D36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementSystem.Application", "TaskManagementSystem.Application\TaskManagementSystem.Application.csproj", "{86176029-6CB9-415B-B7E0-0B787C6D7288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagementSystem.Application", "TaskManagementSystem.Application\TaskManagementSystem.Application.csproj", "{86176029-6CB9-415B-B7E0-0B787C6D7288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementSystem.Domain", "TaskManagementSystem.Domain\TaskManagementSystem.Domain.csproj", "{A413F4F2-6A4C-4CEB-97CA-8CDE8760A77A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagementSystem.Domain", "TaskManagementSystem.Domain\TaskManagementSystem.Domain.csproj", "{A413F4F2-6A4C-4CEB-97CA-8CDE8760A77A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementSystem.Application.Tests", "..\tests\TaskManagementSystem.Application.Tests\TaskManagementSystem.Application.Tests.csproj", "{C28C5FB4-A6F4-431F-9023-44BBC1E9D956}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{A413F4F2-6A4C-4CEB-97CA-8CDE8760A77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A413F4F2-6A4C-4CEB-97CA-8CDE8760A77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A413F4F2-6A4C-4CEB-97CA-8CDE8760A77A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C28C5FB4-A6F4-431F-9023-44BBC1E9D956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C28C5FB4-A6F4-431F-9023-44BBC1E9D956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C28C5FB4-A6F4-431F-9023-44BBC1E9D956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C28C5FB4-A6F4-431F-9023-44BBC1E9D956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{DF313964-C3B4-4AEF-9698-D858D7897D36} = {61EB44EC-CB29-48BC-80C1-617A21CFBDBA}
 		{86176029-6CB9-415B-B7E0-0B787C6D7288} = {61EB44EC-CB29-48BC-80C1-617A21CFBDBA}
 		{A413F4F2-6A4C-4CEB-97CA-8CDE8760A77A} = {61EB44EC-CB29-48BC-80C1-617A21CFBDBA}
+		{C28C5FB4-A6F4-431F-9023-44BBC1E9D956} = {14DC1906-A6F3-4D9E-BFAF-95F00F3DE370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6BFE7D-BEBB-4F3A-AFB5-CD75B30D2141}

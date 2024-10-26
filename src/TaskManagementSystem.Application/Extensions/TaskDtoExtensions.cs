@@ -15,12 +15,5 @@ namespace TaskManagementSystem.Application.Extensions
                 AssignedTo = taskDto.AssignedTo
             };
         }
-
-        public static void MapDtoToEntity(this TaskDto taskDto, TaskEntity taskEntity)
-        {
-            taskEntity.Name = taskDto.Name;
-            taskEntity.Description = taskDto.Description;
-            taskEntity.AssignedTo = taskDto.AssignedTo;
-        }
     }
 }
