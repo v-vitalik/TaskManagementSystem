@@ -37,7 +37,7 @@ Also contains class for sending/receiving messages to RabbitMQ using MassTransit
 │   └── TaskManagementSystem.Domain
 └── tests
     └── TaskManagementSystem.Application.Tests
-
+```
 
 #### How to create RabbitMQ instance
 Note: make sure you have Docker Desktop installed!
