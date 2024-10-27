@@ -11,12 +11,10 @@ namespace TaskManagementSystem.API.Controllers
     public class TasksController : ControllerBase
     {
         private readonly ITaskService _taskService;
-        private readonly IServiceBusHandler _serviceBusHandler;
 
-        public TasksController(ITaskService taskService, IServiceBusHandler serviceBusHandler)
+        public TasksController(ITaskService taskService)
         {
             _taskService = taskService;
-            _serviceBusHandler = serviceBusHandler;
         }
 
         [HttpGet]
@@ -53,24 +51,5 @@ namespace TaskManagementSystem.API.Controllers
                 _ => StatusCode(500, new { result.Errors })
             };
         }
-
-        [HttpPost("message")]
-        public async Task<IActionResult> SendMessage([FromBody] Message message)
-        {
-            await _serviceBusHandler.SendMessage(message);
-            return Ok();
-        }
-
-        [HttpGet("cons")]
-        public IActionResult Consume()
-        {
-            _serviceBusHandler.ReceiveMessage<Message>();
-            return Ok();
-        }
-    }
-
-    public class Message
-    {
-        public string Content { get; set; }
     }
 }
