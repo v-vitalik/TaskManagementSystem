@@ -36,7 +36,7 @@ Also contains class for sending/receiving messages to RabbitMQ using MassTransit
 │   ├── TaskManagementSystem.DataAccess
 │   └── TaskManagementSystem.Domain
 └── tests
-    └── TaskManagementSystem.Application.Tests```
+    └── TaskManagementSystem.Application.Tests
 
 
 #### How to create RabbitMQ instance
