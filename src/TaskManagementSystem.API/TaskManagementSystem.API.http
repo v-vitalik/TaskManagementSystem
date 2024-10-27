@@ -1,3 +1,28 @@
 @TaskManagementSystem.API_HostAddress = http://localhost:5088
 
+### Get all tasks
+GET {{TaskManagementSystem.API_HostAddress}}/api/tasks
+Accept: application/json
+
 ###
+
+### Add a new task
+POST {{TaskManagementSystem.API_HostAddress}}/api/tasks
+Content-Type: application/json
+
+{
+    "name": "New Task",
+    "description": "Description of the new task",
+    "status": "NotStarted",
+    "assignedTo": "User1"
+}
+
+###
+
+### Update a task's status
+PATCH {{TaskManagementSystem.API_HostAddress}}/api/tasks/1
+Content-Type: application/json
+
+{
+    "newStatus": "InProgress"
+}
