@@ -39,7 +39,14 @@ namespace TaskManagementSystem.Application.Services
         public async Task<AddOperationResult<int>> AddTaskAsync(TaskDto taskDto)
         {
             TaskEntity taskEntity = taskDto.ToEntity();
-            taskEntity.Status = TaskEntityStatus.NotStarted;
+            taskEntity.Status = taskDto.Status ?? TaskEntityStatus.NotStarted;
+
+            if (await _taskRepository.TaskWithNameExists(taskEntity.Name))
+            {
+                return new(OperationStatus.BadRequest, 
+                    [$"Task with Name = {taskEntity.Name} already exist. Please enter unique name."]);
+            }
+
             int taskId;
             try
             {
@@ -47,10 +54,10 @@ namespace TaskManagementSystem.Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to add task, TaskDto: {@TaskDto}", taskDto);
+                _logger.LogError(ex, "Failed to add task, TaskDto: {TaskDto}", taskDto);
                 return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
             }
-            taskDto.Id = taskId;
+
             return new(taskId);
         }
 
@@ -63,7 +70,7 @@ namespace TaskManagementSystem.Application.Services
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Failed to get task by id during UpdateTaskStatusAsync execution, id = {@id}", id);
+                _logger.LogError(ex, "Failed to get task by id during UpdateTaskStatusAsync execution, id = {id}", id);
                 return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
             }
 
@@ -79,7 +86,7 @@ namespace TaskManagementSystem.Application.Services
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Failed to update task status, Id: {@id}", id);
+                _logger.LogError(ex, "Failed to update task status, Id: {id}", id);
                 return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
             }
             return new();

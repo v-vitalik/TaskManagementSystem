@@ -26,6 +26,9 @@ namespace TaskManagementSystem.DataAccess.Configuration
             builder.Property(t => t.AssignedTo)
                 .HasMaxLength(100)
                 .IsRequired(false);
+
+            builder.HasIndex(t => t.Name)
+                .IsUnique();
         }
 
     }

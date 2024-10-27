@@ -8,5 +8,6 @@ namespace TaskManagementSystem.Domain.Interfaces
         Task<int> AddAsync(TaskEntity task);
         Task<List<TaskEntity>> GetAllAsync();
         Task UpdateAsync(TaskEntity task);
+        Task<bool> TaskWithNameExists(string name);
     }
 }

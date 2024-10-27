@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskManagementSystem.API.Extensions;
 using TaskManagementSystem.API.Models;
-using TaskManagementSystem.Application.DTOs;
 using TaskManagementSystem.Application.Enums;
 using TaskManagementSystem.Application.Services;
 
@@ -31,9 +31,9 @@ namespace TaskManagementSystem.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTaskAsync([FromBody] TaskDto taskDto)
+        public async Task<IActionResult> AddTaskAsync([FromBody] AddTaskModel model)
         {
-            var result = await _taskService.AddTaskAsync(taskDto);
+            var result = await _taskService.AddTaskAsync(model.ToDto());
             return result.Status switch
             {
                 OperationStatus.Success => Ok(new { result.Id }),

@@ -34,5 +34,10 @@ namespace TaskManagementSystem.DataAccess.Repositories
             _dbContext.Tasks.Update(task);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> TaskWithNameExists(string name)
+        {
+            return await _dbContext.Tasks.AnyAsync(x => x.Name == name);
+        }
     }
 }

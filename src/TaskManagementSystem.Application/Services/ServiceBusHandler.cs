@@ -45,7 +45,7 @@ namespace TaskManagementSystem.Application.Services
             }
             catch(Exception ex)
             {
-                _logger.LogError(ex, "Failed to send message to {@queue} queue after {@retriesCount} attampts", _queueName, _retryCount);
+                _logger.LogError(ex, "Failed to send message to {QueueName} queue after {RetriesCount} retries", _queueName, _retryCount);
             }
         }
 
@@ -65,13 +65,13 @@ namespace TaskManagementSystem.Application.Services
             }
             catch (Exception ex) 
             {
-                _logger.LogError(ex, "Failed to recieve message from {@queue} queue after {@retriesCount} attampts", _queueName, _retryCount);
+                _logger.LogError(ex, "Failed to recieve message from {QueueName} queue after {RetriesCount} attampts", _queueName, _retryCount);
             }
         }
 
         private async Task HandleMessage<T>(T message)
         {
-            _logger.LogInformation("Message recived: {@message}", JsonSerializer.Serialize(message));
+            _logger.LogInformation("Message recived: {Message}", JsonSerializer.Serialize(message));
 
             // System action simulation
             await Task.Delay(TimeSpan.FromSeconds(1));
