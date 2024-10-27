@@ -29,13 +29,14 @@ Also contains class for sending/receiving messages to RabbitMQ using MassTransit
 
 
 ### Project Structure
+```
 ├── src
 │   ├── TaskManagementSystem.API
 │   ├── TaskManagementSystem.Application
 │   ├── TaskManagementSystem.DataAccess
 │   └── TaskManagementSystem.Domain
 └── tests
-    └── TaskManagementSystem.Application.Tests
+    └── TaskManagementSystem.Application.Tests```
 
 
 #### How to create RabbitMQ instance
