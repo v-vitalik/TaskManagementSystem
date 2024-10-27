@@ -14,16 +14,17 @@ Also contains class for sending/receiving messages to RabbitMQ using MassTransit
 
 ### Installation
 1. Clone the repository.
-   ```git clone https://github.com/v-vitalik/TaskManagementSystem.git```  
+   ```git clone https://github.com/v-vitalik/TaskManagementSystem.git```
+  
 2. Open repo folder
    ```cd TaskManagementSystem/src```
 
 3. Update `~src\TaskManagementSystem.API\appsettings.json` with valid connection string and your RabbtMQ instance values.
 
-4. Run migrations to init DB
-   ```dotnet ef database update --project TaskManagementSystem.DataAccess/TaskManagementSystem.DataAccess.csproj --startup-project TaskManagementSystem.API/TaskManagementSystem.API.csproj```
+4. Build project ```dotnet build```
 
-5. Build project ```dotnet build```
+5. Run migrations to init DB
+   ```dotnet ef database update --project TaskManagementSystem.DataAccess/TaskManagementSystem.DataAccess.csproj --startup-project TaskManagementSystem.API/TaskManagementSystem.API.csproj```
 
 6. Run project ```dotnet run --project TaskManagementSystem.API/TaskManagementSystem.API.csproj```
 
