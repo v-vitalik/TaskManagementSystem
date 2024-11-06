@@ -20,75 +20,40 @@ namespace TaskManagementSystem.Application.Services
             _logger = logger;
         }
 
-        public async Task<GetOperationResult<List<TaskDto>>> GetAllTasksAsync()
+        public async Task<GetOperationResult<List<TaskDto>>> GetAllTasksAsync(CancellationToken cancellationToken)
         {
-            List<TaskEntity> tasks;
-            try
-            {
-                tasks = await _taskRepository.GetAllAsync();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Failed to get all tasks");
-                return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
-            }
+            List<TaskEntity> tasks = await _taskRepository.GetAllAsync(cancellationToken);
             var dtos = tasks.Select(x => x.ToDto()).ToList();
             return new(dtos);
         }
 
-        public async Task<AddOperationResult<int>> AddTaskAsync(TaskDto taskDto)
+        public async Task<AddOperationResult<int>> AddTaskAsync(TaskDto taskDto, CancellationToken cancellationToken)
         {
             TaskEntity taskEntity = taskDto.ToEntity();
             taskEntity.Status = taskDto.Status ?? TaskEntityStatus.NotStarted;
 
-            if (await _taskRepository.TaskWithNameExists(taskEntity.Name))
+            if (await _taskRepository.TaskWithNameExists(taskEntity.Name, cancellationToken))
             {
                 return new(OperationStatus.BadRequest, 
                     [$"Task with Name = {taskEntity.Name} already exist. Please enter unique name."]);
             }
 
-            int taskId;
-            try
-            {
-                taskId = await _taskRepository.AddAsync(taskEntity);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Failed to add task, TaskDto: {TaskDto}", taskDto);
-                return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
-            }
+            int taskId = await _taskRepository.AddAsync(taskEntity, cancellationToken);
 
             return new(taskId);
         }
 
-        public async Task<OperationResult> UpdateTaskStatusAsync(int id, TaskEntityStatus newStatus)
+        public async Task<OperationResult> UpdateTaskStatusAsync(int id, TaskEntityStatus newStatus, CancellationToken cancellationToken)
         {
-            TaskEntity entity;
-            try
-            {
-                entity = await _taskRepository.GetByIdAsync(id);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex, "Failed to get task by id during UpdateTaskStatusAsync execution, id = {id}", id);
-                return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
-            }
-
+            TaskEntity entity = await _taskRepository.GetByIdAsync(id, cancellationToken);
             if (entity == null)
             {
                 return new(OperationStatus.NotFound, []);
             }
 
             entity.Status = newStatus;
-            try
-            {
-                await _taskRepository.UpdateAsync(entity);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex, "Failed to update task status, Id: {id}", id);
-                return new(OperationStatus.InternalError, ["Oops.. Something went wrong."]);
-            }
+            await _taskRepository.UpdateAsync(entity, cancellationToken);
+
             return new();
         }
     }

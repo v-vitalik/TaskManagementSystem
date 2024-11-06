@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using TaskManagementSystem.API.ExceptionHandlers;
 using TaskManagementSystem.Application;
 using TaskManagementSystem.Application.Options;
 using TaskManagementSystem.DataAccess;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services
     .AddControllers()
@@ -32,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(_ => { });
 
 app.UseHttpsRedirection();
 

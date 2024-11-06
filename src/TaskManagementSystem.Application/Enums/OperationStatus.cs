@@ -4,7 +4,6 @@
     {
         Success,
         BadRequest,
-        NotFound,
-        InternalError
+        NotFound
     }
 }

@@ -18,9 +18,9 @@ namespace TaskManagementSystem.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = await _taskService.GetAllTasksAsync();
+            var result = await _taskService.GetAllTasksAsync(cancellationToken);
             return result.Status switch
             {
                 OperationStatus.Success => Ok(result.Data),
@@ -29,9 +29,9 @@ namespace TaskManagementSystem.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTaskAsync([FromBody] AddTaskModel model)
+        public async Task<IActionResult> AddTaskAsync([FromBody] AddTaskModel model, CancellationToken cancellationToken)
         {
-            var result = await _taskService.AddTaskAsync(model.ToDto());
+            var result = await _taskService.AddTaskAsync(model.ToDto(), cancellationToken);
             return result.Status switch
             {
                 OperationStatus.Success => Ok(new { result.Id }),
@@ -41,9 +41,11 @@ namespace TaskManagementSystem.API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateTaskStatusAsync(int id, [FromBody] UpdateTaskStatusModel model)
+        public async Task<IActionResult> UpdateTaskStatusAsync(int id, 
+            [FromBody] UpdateTaskStatusModel model, 
+            CancellationToken cancellationToken)
         {
-            var result = await _taskService.UpdateTaskStatusAsync(id, model.NewStatus);
+            var result = await _taskService.UpdateTaskStatusAsync(id, model.NewStatus, cancellationToken);
             return result.Status switch
             {
                 OperationStatus.Success => Ok(),

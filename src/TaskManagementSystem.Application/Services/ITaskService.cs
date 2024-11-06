@@ -6,8 +6,8 @@ namespace TaskManagementSystem.Application.Services
 {
     public interface ITaskService
     {
-        Task<GetOperationResult<List<TaskDto>>> GetAllTasksAsync();
-        Task<AddOperationResult<int>> AddTaskAsync(TaskDto taskDto);
-        Task<OperationResult> UpdateTaskStatusAsync(int id, TaskEntityStatus newStatus);
+        Task<GetOperationResult<List<TaskDto>>> GetAllTasksAsync(CancellationToken cancellationToken);
+        Task<AddOperationResult<int>> AddTaskAsync(TaskDto taskDto, CancellationToken cancellationToken);
+        Task<OperationResult> UpdateTaskStatusAsync(int id, TaskEntityStatus newStatus, CancellationToken cancellationToken);
     }
 }
